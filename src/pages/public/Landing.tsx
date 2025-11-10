@@ -25,7 +25,7 @@ function Landing() {
               <Button
                 onClick={() => navigate("/login")}
                 variant="primary"
-                className="px-4 rounded-pill mx-2"
+                className="px-4 rounded-pill mx-2 mb-2"
               >
                 Iniciar sesión
               </Button>

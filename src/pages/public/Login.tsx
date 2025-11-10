@@ -1,6 +1,7 @@
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { FaEnvelope, FaLock } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const {
@@ -8,6 +9,7 @@ const Login = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm();
+  const navigate = useNavigate()
 
   const onSubmit = async (data:any) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -107,7 +109,7 @@ const Login = () => {
                 <div className="text-center mt-3">
                   <small className="text-muted">
                     ¿No tienes cuenta?{" "}
-                    <a href="/register" className="text-primary fw-semibold">
+                    <a onClick={()=> navigate('/register')} className="text-primary fw-semibold">
                       Regístrate aquí
                     </a>
                   </small>

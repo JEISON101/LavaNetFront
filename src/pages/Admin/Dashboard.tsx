@@ -3,8 +3,6 @@ import {
   Row,
   Col,
   Card,
-  Table,
-  Badge,
 } from "react-bootstrap";
 import {
   LineChart,
@@ -15,9 +13,6 @@ import {
   Tooltip,
   BarChart,
   Bar,
-  PieChart,
-  Pie,
-  Cell,
   ResponsiveContainer,
 } from "recharts";
 
@@ -37,25 +32,6 @@ const Dashboard = () => {
     { name: "Juan", lavadoras: 30 },
     { name: "Carlos", lavadoras: 25 },
     { name: "Karen", lavadoras: 20 },
-  ];
-
-  const rolesData = [
-    { name: "Clientes", value: 1200 },
-    { name: "Proveedores", value: 300 },
-  ];
-
-  const COLORS = ["#007bff", "#28a745"];
-
-  const topProviders = [
-    { nombre: "Proveedor A", alquileres: 230 },
-    { nombre: "Proveedor B", alquileres: 180 },
-    { nombre: "Proveedor C", alquileres: 160 },
-  ];
-
-  const topUsers = [
-    { nombre: "Juan Pérez", alquileres: 20 },
-    { nombre: "María López", alquileres: 18 },
-    { nombre: "Carlos Gómez", alquileres: 17 },
   ];
 
   return (

@@ -34,7 +34,7 @@ const Register = () => {
   const onSubmit = async (data: any) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     console.log("Datos de registro:", { ...data, role });
-    alert(`Registro exitoso como ${role.toUpperCase()} ✅`);
+    alert(`Registro exitoso como ${role.toUpperCase()}`);
     reset();
   };
 
@@ -113,7 +113,7 @@ const Register = () => {
                   </div>
                   {errors.nombres && (
                     <Alert variant="danger" className="py-1 mt-2">
-                      {errors.nombres.message}
+                      {/* errors.nombres.message */}
                     </Alert>
                   )}
                 </Form.Group>
@@ -134,7 +134,7 @@ const Register = () => {
                   </div>
                   {errors.apellidos && (
                     <Alert variant="danger" className="py-1 mt-2">
-                      {errors.apellidos.message}
+                      {/* errors.apellidos.message */}
                     </Alert>
                   )}
                 </Form.Group>
@@ -159,7 +159,7 @@ const Register = () => {
                   </div>
                   {errors.email && (
                     <Alert variant="danger" className="py-1 mt-2">
-                      {errors.email.message}
+                      {/* errors.email.message */}
                     </Alert>
                   )}
                 </Form.Group>
@@ -184,7 +184,7 @@ const Register = () => {
                   </div>
                   {errors.password && (
                     <Alert variant="danger" className="py-1 mt-2">
-                      {errors.password.message}
+                      {/* errors.password.message */}
                     </Alert>
                   )}
                 </Form.Group>
@@ -205,7 +205,7 @@ const Register = () => {
                   </div>
                   {errors.direccion && (
                     <Alert variant="danger" className="py-1 mt-2">
-                      {errors.direccion.message}
+                      {/* errors.direccion.message */}
                     </Alert>
                   )}
                 </Form.Group>
@@ -230,7 +230,7 @@ const Register = () => {
                   </div>
                   {errors.telefono && (
                     <Alert variant="danger" className="py-1 mt-2">
-                      {errors.telefono.message}
+                      {/* errors.telefono.message */}
                     </Alert>
                   )}
                 </Form.Group>
@@ -250,7 +250,7 @@ const Register = () => {
                   </div>
                   {errors.fechaNacimiento && (
                     <Alert variant="danger" className="py-1 mt-2">
-                      {errors.fechaNacimiento.message}
+                      {/* errors.fechaNacimiento.message */}
                     </Alert>
                   )}
                 </Form.Group>

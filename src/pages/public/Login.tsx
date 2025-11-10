@@ -1,4 +1,4 @@
-import { Container, Row, Col, Card, Form, Button, Alert } from "react-bootstrap";
+import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 
@@ -9,7 +9,7 @@ const Login = () => {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data:any) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     console.log("Datos del login:", data);
     alert(`Bienvenido, ${data.email}`);
@@ -59,7 +59,7 @@ const Login = () => {
                   </div>
                   {errors.email && (
                     <div className="text-danger small mt-1">
-                      {errors.email.message}
+                      {/* errors.email.message */}
                     </div>
                   )}
                 </Form.Group>
@@ -87,7 +87,7 @@ const Login = () => {
                   </div>
                   {errors.password && (
                     <div className="text-danger small mt-1">
-                      {errors.password.message}
+                      {/* errors.password.message */}
                     </div>
                   )}
                 </Form.Group>

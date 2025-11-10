@@ -20,9 +20,11 @@ import {
   FaBirthdayCake,
   FaUserTag,
 } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [role, setRole] = useState("cliente");
+  const navigate = useNavigate()
 
   const {
     register,
@@ -268,7 +270,7 @@ const Register = () => {
                 {/* Link */}
                 <div className="text-center mt-3">
                   <small className="text-muted">
-                    ¿Ya tienes cuenta? <a href="login">Inicia sesión</a>
+                    ¿Ya tienes cuenta? <a onClick={()=> navigate('/login')} className="text-primary fw-semibold">Inicia sesión</a>
                   </small>
                 </div>
               </Form>

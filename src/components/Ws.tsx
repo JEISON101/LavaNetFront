@@ -12,22 +12,20 @@ function WS() {
       webSocketFactory: () => new SockJS("http://localhost:8080/ws-ubicaciones"),
       reconnectDelay: 5000,
       onConnect: () => {
-        console.log("🛰️ Conectado al WebSocket");
+        console.log("Conectado al WebSocket");
         client.subscribe("/topic/ubicaciones", (msg) => {
           const ubicacionRecibida = JSON.parse(msg.body);
           setUbicacion(ubicacionRecibida);
         });
       },
-      onDisconnect: () => console.log("🔌 Desconectado"),
+      onDisconnect: () => console.log("Desconectado"),
     });
 
     client.activate();
     stompClientRef.current = client;
 
-    // 🔧 No retornes async directamente
     return () => {
       if (client.active) {
-        // Ejecuta la desactivación sin async/await
         client.deactivate().catch((err) => console.error("Error al desconectar:", err));
       }
     };
@@ -38,7 +36,7 @@ function WS() {
     if (!client || !client.connected) return;
 
     const data = {
-      usuario: { idUsuario: 5 }, // reemplaza con id real
+      usuario: { idUsuario: 5 },
       latitud: lat,
       longitud: lon,
     };

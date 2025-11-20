@@ -21,23 +21,31 @@ import {
   FaUserTag,
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import type { Register as RegisterData } from "../../interfaces/authInterface";
+import { registerService } from "../../services/authService";
 
 const Register = () => {
-  const [role, setRole] = useState("cliente");
-  const navigate = useNavigate()
+  const [rol, setRol] = useState("Cliente");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    reset,
-  } = useForm();
+  } = useForm<RegisterData>();
 
-  const onSubmit = async (data: any) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log("Datos de registro:", { ...data, role });
-    alert(`Registro exitoso como ${role.toUpperCase()}`);
-    reset();
+  const onSubmit = async (data: RegisterData) => {
+    try {
+      setError("");
+      const dataWithRole = { ...data, rol };
+      console.log("Registrando usuario:", dataWithRole);
+      const response = await registerService(dataWithRole);
+      alert(response.message);
+      navigate("/login");
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Error al registrarse");
+    }
   };
 
   return (
@@ -54,6 +62,12 @@ const Register = () => {
                 Crear cuenta
               </h3>
 
+              {error && (
+                <Alert variant="danger" className="mb-3">
+                  {error}
+                </Alert>
+              )}
+
               {/* Selector de rol */}
               <div className="text-center mb-4">
                 <div className="d-flex justify-content-center align-items-center gap-2 mb-2">
@@ -63,15 +77,15 @@ const Register = () => {
 
                 <ToggleButtonGroup
                   type="radio"
-                  name="role"
-                  value={role}
-                  onChange={(val) => setRole(val)}
+                  name="rol"
+                  value={rol}
+                  onChange={(val) => setRol(val)}
                   className="mt-2"
                 >
                   <ToggleButton
                     id="tbg-radio-1"
-                    value="cliente"
-                    variant={role === "cliente" ? "primary" : "outline-primary"}
+                    value="Cliente"
+                    variant={rol === "Cliente" ? "primary" : "outline-primary"}
                     className="px-4 py-2 fw-semibold rounded-pill"
                     style={{
                       minWidth: "100px",
@@ -83,9 +97,9 @@ const Register = () => {
 
                   <ToggleButton
                     id="tbg-radio-2"
-                    value="proveedor"
+                    value="Proveedor"
                     variant={
-                      role === "proveedor" ? "success" : "outline-success"
+                      rol === "Proveedor" ? "success" : "outline-success"
                     }
                     className="px-4 py-2 fw-semibold rounded-pill ms-3"
                     style={{
@@ -115,7 +129,7 @@ const Register = () => {
                   </div>
                   {errors.nombres && (
                     <Alert variant="danger" className="py-1 mt-2">
-                      {/* errors.nombres.message */}
+                      {errors.nombres.message}
                     </Alert>
                   )}
                 </Form.Group>
@@ -136,7 +150,7 @@ const Register = () => {
                   </div>
                   {errors.apellidos && (
                     <Alert variant="danger" className="py-1 mt-2">
-                      {/* errors.apellidos.message */}
+                      {errors.apellidos.message}
                     </Alert>
                   )}
                 </Form.Group>
@@ -149,7 +163,7 @@ const Register = () => {
                     <Form.Control
                       type="email"
                       placeholder="correo@ejemplo.com"
-                      {...register("email", {
+                      {...register("correo", {
                         required: "El correo es obligatorio",
                         pattern: {
                           value: /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/,
@@ -159,9 +173,9 @@ const Register = () => {
                       className="border-0 shadow-none"
                     />
                   </div>
-                  {errors.email && (
+                  {errors.correo && (
                     <Alert variant="danger" className="py-1 mt-2">
-                      {/* errors.email.message */}
+                      {errors.correo.message}
                     </Alert>
                   )}
                 </Form.Group>
@@ -186,7 +200,7 @@ const Register = () => {
                   </div>
                   {errors.password && (
                     <Alert variant="danger" className="py-1 mt-2">
-                      {/* errors.password.message */}
+                      {errors.password.message}
                     </Alert>
                   )}
                 </Form.Group>
@@ -207,7 +221,7 @@ const Register = () => {
                   </div>
                   {errors.direccion && (
                     <Alert variant="danger" className="py-1 mt-2">
-                      {/* errors.direccion.message */}
+                      {errors.direccion.message}
                     </Alert>
                   )}
                 </Form.Group>
@@ -232,7 +246,7 @@ const Register = () => {
                   </div>
                   {errors.telefono && (
                     <Alert variant="danger" className="py-1 mt-2">
-                      {/* errors.telefono.message */}
+                      {errors.telefono.message}
                     </Alert>
                   )}
                 </Form.Group>
@@ -252,25 +266,30 @@ const Register = () => {
                   </div>
                   {errors.fechaNacimiento && (
                     <Alert variant="danger" className="py-1 mt-2">
-                      {/* errors.fechaNacimiento.message */}
+                      {errors.fechaNacimiento.message}
                     </Alert>
                   )}
                 </Form.Group>
 
-                {/* Botón */}
                 <Button
                   type="submit"
-                  variant={role === "proveedor" ? "success" : "primary"}
+                  variant={rol === "Proveedor" ? "success" : "primary"}
                   className="w-100 rounded-pill py-2 fw-semibold"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Registrando..." : `Registrarme como ${role}`}
+                  {isSubmitting ? "Registrando..." : `Registrarme como ${rol}`}
                 </Button>
 
-                {/* Link */}
                 <div className="text-center mt-3">
                   <small className="text-muted">
-                    ¿Ya tienes cuenta? <a onClick={()=> navigate('/login')} className="text-primary fw-semibold">Inicia sesión</a>
+                    ¿Ya tienes cuenta?{" "}
+                    <a
+                      onClick={() => navigate("/login")}
+                      className="text-primary fw-semibold"
+                      style={{ cursor: "pointer" }}
+                    >
+                      Inicia sesión
+                    </a>
                   </small>
                 </div>
               </Form>
@@ -282,4 +301,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Register

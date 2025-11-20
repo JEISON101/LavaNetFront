@@ -2,19 +2,21 @@ import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import type { LoginInterface } from "../../interfaces/authInterface";
+import { loginService } from "../../services/authService";
 
 const Login = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm<LoginInterface>();
   const navigate = useNavigate()
 
-  const onSubmit = async (data:any) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log("Datos del login:", data);
-    alert(`Bienvenido, ${data.email}`);
+  const onSubmit = async (data:LoginInterface) => {
+    const res =await loginService(data);
+    alert(res)
+    navigate('/admin/home')
   };
 
   return (
@@ -48,7 +50,7 @@ const Login = () => {
                     <Form.Control
                       type="email"
                       placeholder="tuemail@ejemplo.com"
-                      {...register("email", {
+                      {...register("correo", {
                         required: "El correo es obligatorio",
                         pattern: {
                           value: /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/,
@@ -59,9 +61,9 @@ const Login = () => {
                       style={{ fontSize: "0.95rem" }}
                     />
                   </div>
-                  {errors.email && (
+                  {errors.correo && (
                     <div className="text-danger small mt-1">
-                      {/* errors.email.message */}
+                      {errors.correo.message}
                     </div>
                   )}
                 </Form.Group>
@@ -89,12 +91,11 @@ const Login = () => {
                   </div>
                   {errors.password && (
                     <div className="text-danger small mt-1">
-                      {/* errors.password.message */}
+                      {errors.password.message}
                     </div>
                   )}
                 </Form.Group>
 
-                {/* Botón */}
                 <Button
                   type="submit"
                   variant="primary"
@@ -105,11 +106,10 @@ const Login = () => {
                   {isSubmitting ? "Ingresando..." : "Iniciar sesión"}
                 </Button>
 
-                {/* Enlace registro */}
                 <div className="text-center mt-3">
                   <small className="text-muted">
                     ¿No tienes cuenta?{" "}
-                    <a onClick={()=> navigate('/register')} className="text-primary fw-semibold">
+                    <a onClick={()=> navigate('/register')} className="text-primary fw-semibold hover:cursor-pointer">
                       Regístrate aquí
                     </a>
                   </small>

@@ -1,5 +1,4 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
-import logo from "../../../public/logo.png";
 import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
@@ -24,7 +23,7 @@ const Hero = () => {
         </Col>
         <Col md={5} className="mt-5 mt-md-0">
           <img
-            src={logo}
+            src="https://res.cloudinary.com/djfutossp/image/upload/v1765488099/xzdi8kcfaxvow5qxgcps.png"
             alt="App mockup"
             className="img-fluid rounded shadow-lg"
             style={{ borderRadius: "1.5rem" }}

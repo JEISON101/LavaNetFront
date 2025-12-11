@@ -11,7 +11,7 @@ function Landing() {
       <Navbar expand="md" fixed="top" bg="white" className="shadow-sm py-2 align-items-center">
         <Container>
           <Navbar.Brand href="/" className="fw-bold text-primary fs-2">
-            LavApp
+            LavaNet
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="nav" />
           <Navbar.Collapse id="nav" className="justify-content-end">
@@ -25,7 +25,7 @@ function Landing() {
               <Button
                 onClick={() => navigate("/login")}
                 variant="primary"
-                className="px-4 rounded-pill mx-2 mb-2"
+                className="px-4 rounded-pill mx-2"
               >
                 Iniciar sesión
               </Button>
@@ -57,7 +57,7 @@ function Landing() {
       <footer className="py-4 text-center text-muted bg-light border-top">
         <Container>
           <p className="mb-1">
-            &copy; {new Date().getFullYear()} LavApp. Todos los derechos
+            &copy; {new Date().getFullYear()} LavaNet. Todos los derechos
             reservados.
           </p>
           <small>Contacto | Términos | Privacidad</small>

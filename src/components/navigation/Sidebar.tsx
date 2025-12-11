@@ -30,7 +30,7 @@ const Sidebar:React.FC <PropSide> = () => {
       className="d-flex flex-column bg-white shadow-sm p-3"
       style={{ width: "250px", minHeight: "100vh" }}
     >
-      <h5 className="fw-bold text-primary mb-4">LavApp</h5>
+      <h5 className="fw-bold text-primary mb-4">LavaNet</h5>
       <Nav className="flex-column">
         {menu['admin']?.map((item, i) => (
           <Nav.Link
